@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CF3BD8042A06115D37B3BEB /* Pods_FLOMusicPlayer_ReactorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */; };
 		AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */; };
 		AEFF94952813EA8F00BF4D70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */; };
 		AEFF94972813EA8F00BF4D70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94962813EA8F00BF4D70 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FA1163549060BF65A78AF23 /* Pods-FLOMusicPlayer_ReactorKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLOMusicPlayer_ReactorKit.release.xcconfig"; path = "Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit.release.xcconfig"; sourceTree = "<group>"; };
 		AEFF948F2813EA8F00BF4D70 /* FLOMusicPlayer_ReactorKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLOMusicPlayer_ReactorKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		AEFF949B2813EA9000BF4D70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEFF949E2813EA9000BF4D70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEFF94A02813EA9000BF4D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE238ABEA2A05F8AF66DCAA3 /* Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig"; path = "Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig"; sourceTree = "<group>"; };
+		F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLOMusicPlayer_ReactorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF3BD8042A06115D37B3BEB /* Pods_FLOMusicPlayer_ReactorKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A28EAF9A88A57B8E9EB0AEE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AEFF94862813EA8F00BF4D70 = {
 			isa = PBXGroup;
 			children = (
 				AEFF94912813EA8F00BF4D70 /* FLOMusicPlayer_ReactorKit */,
 				AEFF94902813EA8F00BF4D70 /* Products */,
+				E9F83106A3ED28805E994357 /* Pods */,
+				A28EAF9A88A57B8E9EB0AEE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,16 @@
 			path = FLOMusicPlayer_ReactorKit;
 			sourceTree = "<group>";
 		};
+		E9F83106A3ED28805E994357 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DE238ABEA2A05F8AF66DCAA3 /* Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig */,
+				0FA1163549060BF65A78AF23 /* Pods-FLOMusicPlayer_ReactorKit.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEFF94A32813EA9000BF4D70 /* Build configuration list for PBXNativeTarget "FLOMusicPlayer_ReactorKit" */;
 			buildPhases = (
+				4C2A7BC8C3C54A90385B7771 /* [CP] Check Pods Manifest.lock */,
 				AEFF948B2813EA8F00BF4D70 /* Sources */,
 				AEFF948C2813EA8F00BF4D70 /* Frameworks */,
 				AEFF948D2813EA8F00BF4D70 /* Resources */,
+				D7FC1B9A106C4E0D3D50633D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4C2A7BC8C3C54A90385B7771 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FLOMusicPlayer_ReactorKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7FC1B9A106C4E0D3D50633D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AEFF948B2813EA8F00BF4D70 /* Sources */ = {
@@ -284,6 +353,7 @@
 		};
 		AEFF94A42813EA9000BF4D70 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE238ABEA2A05F8AF66DCAA3 /* Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +382,7 @@
 		};
 		AEFF94A52813EA9000BF4D70 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FA1163549060BF65A78AF23 /* Pods-FLOMusicPlayer_ReactorKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

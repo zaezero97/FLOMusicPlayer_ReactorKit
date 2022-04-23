@@ -1,0 +1,6 @@
+framework module Pods_FLOMusicPlayer_ReactorKit {
+  umbrella header "Pods-FLOMusicPlayer_ReactorKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
