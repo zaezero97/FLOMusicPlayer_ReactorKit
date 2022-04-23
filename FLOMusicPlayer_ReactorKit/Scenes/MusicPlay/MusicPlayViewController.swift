@@ -7,8 +7,64 @@
 
 import UIKit
 import ReactorKit
+import SnapKit
+import Then
 
 final class MusicPlayViewController: BaseViewController, View {
+    
+    private let titleLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 14.0, weight: .bold)
+    }
+    
+    private let singerLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 12.0, weight: .regular)
+    }
+    
+    private let titleImageView = UIImageView().then {
+        $0.layer.cornerRadius = 16.0
+        $0.contentMode = .scaleAspectFill
+    }
+    
+    private let progressBar = UISlider()
+    
+    private let lyricsTableView = UITableView().then {
+        $0.isScrollEnabled = false
+    }
+    
+    private let replyButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "repeat"), for: .normal)
+    }
+    
+    private let backwardButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "backward.end.fill"), for: .normal)
+    }
+    
+    private let playButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
+    private let forwardButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "forward.end.fill"), for: .normal)
+    }
+    
+    private let shuffleButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "shuffle"), for: .normal)
+    }
+    
+    private let curTimeLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 12.0)
+        $0.text = "00:00"
+    }
+    
+    private let endTimeLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 12.0)
+        $0.text = "99:99"
+    }
+    
+    private let bottomButtonStackView = UIStackView().then {
+        $0.distribution = .fillEqually
+        $0.spacing = 8.0
+    }
     
     init(reactor: MusicPlayReactor) {
         super.init(nibName: nil, bundle: nil)
@@ -26,6 +82,70 @@ final class MusicPlayViewController: BaseViewController, View {
     override func configureUI() {
         super.configureUI()
         
+        [
+            replyButton,
+            backwardButton,
+            playButton,
+            forwardButton,
+            shuffleButton
+        ].forEach {
+            bottomButtonStackView.addArrangedSubview($0)
+        }
+        
+        [
+            titleLabel,
+            singerLabel,
+            titleImageView,
+            lyricsTableView,
+            progressBar,
+            bottomButtonStackView,
+            curTimeLabel,
+            endTimeLabel
+        ].forEach {
+            view.addSubview($0)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16.0)
+            make.top.equalToSuperview().inset(38.0)
+        }
+        
+        singerLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8.0)
+            make.leading.trailing.equalTo(titleLabel)
+        }
+        
+        titleImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(titleLabel)
+            make.top.equalTo(singerLabel.snp.bottom).offset(8.0)
+        }
+        titleImageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
+        
+        lyricsTableView.snp.makeConstraints { make in
+            make.height.equalTo(100.0)
+            make.leading.trailing.equalToSuperview().inset(30.0)
+        }
+        
+        progressBar.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(10.0)
+            make.top.equalTo(lyricsTableView.snp.bottom).offset(20.0)
+        }
+        
+        curTimeLabel.snp.makeConstraints { make in
+            make.leading.equalTo(progressBar)
+            make.top.equalTo(progressBar.snp.bottom).offset(3.0)
+        }
+        
+        endTimeLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(progressBar)
+            make.top.equalTo(curTimeLabel)
+        }
+        
+        bottomButtonStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(10.0)
+            make.top.equalTo(curTimeLabel.snp.bottom).offset(8.0)
+            make.bottom.equalToSuperview().inset(60.0)
+        }
     }
     
     func bind(reactor: MusicPlayReactor) {
