@@ -8,4 +8,6 @@ target 'FLOMusicPlayer_ReactorKit' do
   # Pods for FLOMusicPlayer_ReactorKit
 	pod 'ReactorKit'
 	pod 'Alamofire'
+  pod 'SnapKit'
+  pod 'Then'
 end
