@@ -10,10 +10,11 @@
 		2CF3BD8042A06115D37B3BEB /* Pods_FLOMusicPlayer_ReactorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */; };
 		AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */; };
 		AEFF94952813EA8F00BF4D70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */; };
-		AEFF94972813EA8F00BF4D70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94962813EA8F00BF4D70 /* ViewController.swift */; };
-		AEFF949A2813EA8F00BF4D70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEFF94982813EA8F00BF4D70 /* Main.storyboard */; };
 		AEFF949C2813EA9000BF4D70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEFF949B2813EA9000BF4D70 /* Assets.xcassets */; };
 		AEFF949F2813EA9000BF4D70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEFF949D2813EA9000BF4D70 /* LaunchScreen.storyboard */; };
+		AEFF94AB2813ECDF00BF4D70 /* MusicPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94AA2813ECDF00BF4D70 /* MusicPlayViewController.swift */; };
+		AEFF94AD2813ED0300BF4D70 /* MusicPlayReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94AC2813ED0300BF4D70 /* MusicPlayReactor.swift */; };
+		AEFF94B02813EE2500BF4D70 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94AF2813EE2500BF4D70 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,11 +22,12 @@
 		AEFF948F2813EA8F00BF4D70 /* FLOMusicPlayer_ReactorKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLOMusicPlayer_ReactorKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AEFF94962813EA8F00BF4D70 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AEFF94992813EA8F00BF4D70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AEFF949B2813EA9000BF4D70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEFF949E2813EA9000BF4D70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEFF94A02813EA9000BF4D70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AEFF94AA2813ECDF00BF4D70 /* MusicPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayViewController.swift; sourceTree = "<group>"; };
+		AEFF94AC2813ED0300BF4D70 /* MusicPlayReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayReactor.swift; sourceTree = "<group>"; };
+		AEFF94AF2813EE2500BF4D70 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DE238ABEA2A05F8AF66DCAA3 /* Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig"; path = "Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig"; sourceTree = "<group>"; };
 		F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLOMusicPlayer_ReactorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -71,15 +73,56 @@
 		AEFF94912813EA8F00BF4D70 /* FLOMusicPlayer_ReactorKit */ = {
 			isa = PBXGroup;
 			children = (
+				AEFF94A92813ECB500BF4D70 /* Model */,
+				AEFF94A82813ECB000BF4D70 /* Network */,
+				AEFF94A62813ECA100BF4D70 /* Scenes */,
 				AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */,
 				AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */,
-				AEFF94962813EA8F00BF4D70 /* ViewController.swift */,
-				AEFF94982813EA8F00BF4D70 /* Main.storyboard */,
 				AEFF949B2813EA9000BF4D70 /* Assets.xcassets */,
 				AEFF949D2813EA9000BF4D70 /* LaunchScreen.storyboard */,
 				AEFF94A02813EA9000BF4D70 /* Info.plist */,
 			);
 			path = FLOMusicPlayer_ReactorKit;
+			sourceTree = "<group>";
+		};
+		AEFF94A62813ECA100BF4D70 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				AEFF94AE2813EE1A00BF4D70 /* Common */,
+				AEFF94A72813ECA800BF4D70 /* MusicPlay */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		AEFF94A72813ECA800BF4D70 /* MusicPlay */ = {
+			isa = PBXGroup;
+			children = (
+				AEFF94AA2813ECDF00BF4D70 /* MusicPlayViewController.swift */,
+				AEFF94AC2813ED0300BF4D70 /* MusicPlayReactor.swift */,
+			);
+			path = MusicPlay;
+			sourceTree = "<group>";
+		};
+		AEFF94A82813ECB000BF4D70 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AEFF94A92813ECB500BF4D70 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AEFF94AE2813EE1A00BF4D70 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AEFF94AF2813EE2500BF4D70 /* BaseViewController.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		E9F83106A3ED28805E994357 /* Pods */ = {
@@ -88,7 +131,6 @@
 				DE238ABEA2A05F8AF66DCAA3 /* Pods-FLOMusicPlayer_ReactorKit.debug.xcconfig */,
 				0FA1163549060BF65A78AF23 /* Pods-FLOMusicPlayer_ReactorKit.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -154,7 +196,6 @@
 			files = (
 				AEFF949F2813EA9000BF4D70 /* LaunchScreen.storyboard in Resources */,
 				AEFF949C2813EA9000BF4D70 /* Assets.xcassets in Resources */,
-				AEFF949A2813EA8F00BF4D70 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,8 +248,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEFF94972813EA8F00BF4D70 /* ViewController.swift in Sources */,
+				AEFF94B02813EE2500BF4D70 /* BaseViewController.swift in Sources */,
+				AEFF94AD2813ED0300BF4D70 /* MusicPlayReactor.swift in Sources */,
 				AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */,
+				AEFF94AB2813ECDF00BF4D70 /* MusicPlayViewController.swift in Sources */,
 				AEFF94952813EA8F00BF4D70 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,14 +259,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AEFF94982813EA8F00BF4D70 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AEFF94992813EA8F00BF4D70 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AEFF949D2813EA9000BF4D70 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -364,7 +399,6 @@
 				INFOPLIST_FILE = FLOMusicPlayer_ReactorKit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -393,7 +427,6 @@
 				INFOPLIST_FILE = FLOMusicPlayer_ReactorKit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
