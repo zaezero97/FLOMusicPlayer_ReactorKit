@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2CF3BD8042A06115D37B3BEB /* Pods_FLOMusicPlayer_ReactorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */; };
+		AEA0B20A2815227900193449 /* MusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B2092815227900193449 /* MusicAPI.swift */; };
+		AEA0B20D2815254E00193449 /* MusicAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B20C2815254E00193449 /* MusicAPIService.swift */; };
+		AEA0B20F2815278C00193449 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B20E2815278C00193449 /* Networkable.swift */; };
+		AEA0B211281527B900193449 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B210281527B900193449 /* NetworkLoggerPlugin.swift */; };
+		AEA0B21528152BF100193449 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B21428152BF100193449 /* Music.swift */; };
 		AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */; };
 		AEFF94952813EA8F00BF4D70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */; };
 		AEFF949C2813EA9000BF4D70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEFF949B2813EA9000BF4D70 /* Assets.xcassets */; };
@@ -19,6 +24,11 @@
 
 /* Begin PBXFileReference section */
 		0FA1163549060BF65A78AF23 /* Pods-FLOMusicPlayer_ReactorKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLOMusicPlayer_ReactorKit.release.xcconfig"; path = "Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit.release.xcconfig"; sourceTree = "<group>"; };
+		AEA0B2092815227900193449 /* MusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAPI.swift; sourceTree = "<group>"; };
+		AEA0B20C2815254E00193449 /* MusicAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAPIService.swift; sourceTree = "<group>"; };
+		AEA0B20E2815278C00193449 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
+		AEA0B210281527B900193449 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
+		AEA0B21428152BF100193449 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		AEFF948F2813EA8F00BF4D70 /* FLOMusicPlayer_ReactorKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLOMusicPlayer_ReactorKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +60,22 @@
 				F57F30BE791DE55424F27498 /* Pods_FLOMusicPlayer_ReactorKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AEA0B2082815226C00193449 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				AEA0B2092815227900193449 /* MusicAPI.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		AEA0B20B2815253F00193449 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AEA0B20C2815254E00193449 /* MusicAPIService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		AEFF94862813EA8F00BF4D70 = {
@@ -106,6 +132,10 @@
 		AEFF94A82813ECB000BF4D70 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AEA0B20B2815253F00193449 /* Service */,
+				AEA0B2082815226C00193449 /* EndPoint */,
+				AEA0B20E2815278C00193449 /* Networkable.swift */,
+				AEA0B210281527B900193449 /* NetworkLoggerPlugin.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -113,6 +143,7 @@
 		AEFF94A92813ECB500BF4D70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AEA0B21428152BF100193449 /* Music.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,11 +279,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA0B20A2815227900193449 /* MusicAPI.swift in Sources */,
+				AEA0B211281527B900193449 /* NetworkLoggerPlugin.swift in Sources */,
 				AEFF94B02813EE2500BF4D70 /* BaseViewController.swift in Sources */,
+				AEA0B20F2815278C00193449 /* Networkable.swift in Sources */,
 				AEFF94AD2813ED0300BF4D70 /* MusicPlayReactor.swift in Sources */,
 				AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */,
 				AEFF94AB2813ECDF00BF4D70 /* MusicPlayViewController.swift in Sources */,
+				AEA0B21528152BF100193449 /* Music.swift in Sources */,
 				AEFF94952813EA8F00BF4D70 /* SceneDelegate.swift in Sources */,
+				AEA0B20D2815254E00193449 /* MusicAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

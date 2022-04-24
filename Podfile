@@ -7,7 +7,7 @@ target 'FLOMusicPlayer_ReactorKit' do
 
   # Pods for FLOMusicPlayer_ReactorKit
 	pod 'ReactorKit'
-	pod 'Alamofire'
+  pod 'Moya/RxSwift', '~> 15.0'
   pod 'SnapKit'
   pod 'Then'
 end

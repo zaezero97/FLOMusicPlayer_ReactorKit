@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-FLOMusicPlayer_ReactorKit/Pods-FLOMusicPlayer_ReactorKit-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
 ${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework
 ${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
