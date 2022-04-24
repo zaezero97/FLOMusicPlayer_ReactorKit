@@ -13,6 +13,7 @@
 		AEA0B20F2815278C00193449 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B20E2815278C00193449 /* Networkable.swift */; };
 		AEA0B211281527B900193449 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B210281527B900193449 /* NetworkLoggerPlugin.swift */; };
 		AEA0B21528152BF100193449 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B21428152BF100193449 /* Music.swift */; };
+		AEA0B218281540AC00193449 /* LyricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0B217281540AC00193449 /* LyricCell.swift */; };
 		AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */; };
 		AEFF94952813EA8F00BF4D70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */; };
 		AEFF949C2813EA9000BF4D70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEFF949B2813EA9000BF4D70 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		AEA0B20E2815278C00193449 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
 		AEA0B210281527B900193449 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEA0B21428152BF100193449 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		AEA0B217281540AC00193449 /* LyricCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricCell.swift; sourceTree = "<group>"; };
 		AEFF948F2813EA8F00BF4D70 /* FLOMusicPlayer_ReactorKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLOMusicPlayer_ReactorKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFF94922813EA8F00BF4D70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEFF94942813EA8F00BF4D70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		AEA0B216281540A500193449 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEA0B217281540AC00193449 /* LyricCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AEFF94862813EA8F00BF4D70 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +133,7 @@
 		AEFF94A72813ECA800BF4D70 /* MusicPlay */ = {
 			isa = PBXGroup;
 			children = (
+				AEA0B216281540A500193449 /* View */,
 				AEFF94AA2813ECDF00BF4D70 /* MusicPlayViewController.swift */,
 				AEFF94AC2813ED0300BF4D70 /* MusicPlayReactor.swift */,
 			);
@@ -284,6 +295,7 @@
 				AEFF94B02813EE2500BF4D70 /* BaseViewController.swift in Sources */,
 				AEA0B20F2815278C00193449 /* Networkable.swift in Sources */,
 				AEFF94AD2813ED0300BF4D70 /* MusicPlayReactor.swift in Sources */,
+				AEA0B218281540AC00193449 /* LyricCell.swift in Sources */,
 				AEFF94932813EA8F00BF4D70 /* AppDelegate.swift in Sources */,
 				AEFF94AB2813ECDF00BF4D70 /* MusicPlayViewController.swift in Sources */,
 				AEA0B21528152BF100193449 /* Music.swift in Sources */,

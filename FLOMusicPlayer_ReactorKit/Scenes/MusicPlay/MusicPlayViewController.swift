@@ -9,26 +9,35 @@ import UIKit
 import ReactorKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
+import Kingfisher
 
 final class MusicPlayViewController: BaseViewController, View {
     
     private let titleLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 14.0, weight: .bold)
+        $0.font = .systemFont(ofSize: 28.0, weight: .bold)
+        $0.textAlignment = .center
     }
     
     private let singerLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 12.0, weight: .regular)
+        $0.font = .systemFont(ofSize: 16.0, weight: .regular)
+        $0.textAlignment = .center
     }
     
     private let titleImageView = UIImageView().then {
+        $0.contentMode = .scaleToFill
         $0.layer.cornerRadius = 16.0
-        $0.contentMode = .scaleAspectFill
+        $0.layer.masksToBounds = true
     }
     
     private let progressBar = UISlider()
     
     private let lyricsTableView = UITableView().then {
-        $0.isScrollEnabled = false
+        $0.showsVerticalScrollIndicator = false
+        $0.register(LyricCell.self, forCellReuseIdentifier: LyricCell.identifier)
+        $0.separatorStyle = .none
+        $0.rowHeight = 45.0
     }
     
     private let replyButton = UIButton().then {
@@ -53,12 +62,12 @@ final class MusicPlayViewController: BaseViewController, View {
     
     private let curTimeLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 12.0)
-        $0.text = "00:00"
+        $0.text = "--:--"
     }
     
     private let endTimeLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 12.0)
-        $0.text = "99:99"
+        $0.text = "--:--"
     }
     
     private let bottomButtonStackView = UIStackView().then {
@@ -107,7 +116,7 @@ final class MusicPlayViewController: BaseViewController, View {
         
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16.0)
-            make.top.equalToSuperview().inset(38.0)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(72.0)
         }
         
         singerLabel.snp.makeConstraints { make in
@@ -117,7 +126,8 @@ final class MusicPlayViewController: BaseViewController, View {
         
         titleImageView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(titleLabel)
-            make.top.equalTo(singerLabel.snp.bottom).offset(8.0)
+            make.top.equalTo(singerLabel.snp.bottom).offset(16.0)
+            make.bottom.equalTo(lyricsTableView.snp.top).offset(-16.0)
         }
         titleImageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
         
@@ -150,5 +160,31 @@ final class MusicPlayViewController: BaseViewController, View {
     
     func bind(reactor: MusicPlayReactor) {
         
+        //viewDidLoad Action
+        reactor.action.onNext(.refresh)
+        
+        //state
+        reactor.state.map {  $0.music }
+        .debug()
+        .bind(onNext: bindMusicPlayScene(_:))
+        .disposed(by: disposeBag)
+        
+        reactor.state.map{ $0.lyrics }
+        .debug()
+        .bind(to: lyricsTableView.rx.items(cellIdentifier: LyricCell.identifier, cellType: LyricCell.self)) { index, lyric, cell in
+            cell.update(with: lyric)
+        }.disposed(by: self.disposeBag)
+        
+    }
+}
+
+private extension MusicPlayViewController {
+    func bindMusicPlayScene(_ music: Music) {
+        titleLabel.text = music.title
+        singerLabel.text = music.singer
+        titleImageView.kf.setImage(
+            with: URL(string: music.image) ?? URL(string: "")
+        )
+        titleImageView.kf.indicatorType = .activity
     }
 }
