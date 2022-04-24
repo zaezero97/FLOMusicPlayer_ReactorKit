@@ -9,6 +9,8 @@ import UIKit
 import ReactorKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 final class MusicPlayViewController: BaseViewController, View {
     
@@ -150,5 +152,18 @@ final class MusicPlayViewController: BaseViewController, View {
     
     func bind(reactor: MusicPlayReactor) {
         
+        //viewDidLoad Action
+        reactor.action.onNext(.refresh)
+        
+        //state
+        reactor.state.map {  $0.music }
+        .debug()
+        .bind(onNext: bindMusicPlayScene(_:))
+        .disposed(by: disposeBag)
+    }
+}
+
+private extension MusicPlayViewController {
+    func bindMusicPlayScene(_ music: Music) {
     }
 }
