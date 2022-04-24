@@ -11,4 +11,6 @@ target 'FLOMusicPlayer_ReactorKit' do
   pod 'RxCocoa', '6.5.0'
   pod 'SnapKit'
   pod 'Then'
+  pod 'Kingfisher'
+  
 end
