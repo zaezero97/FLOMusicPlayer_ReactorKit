@@ -20,6 +20,7 @@ final class MusicPlayReactor: Reactor {
     
     struct State {
         var music: Music
+        var lyrics: [String]
         
     }
     
@@ -32,7 +33,8 @@ final class MusicPlayReactor: Reactor {
             image: "",
             file: "",
             lyrics: "ㄹㄴㅇㅁㅇㄹㅇㄴㅁ"
-        )
+        ),
+        lyrics: []
     )
     
     private let musicAPIService: MusicAPIService
@@ -61,6 +63,7 @@ final class MusicPlayReactor: Reactor {
         switch mutation {
         case .setMusic(let music):
             newState.music = music
+            newState.lyrics = music.lyrics.components(separatedBy: "\n")
         }
         
         return newState
