@@ -8,6 +8,7 @@ target 'FLOMusicPlayer_ReactorKit' do
   # Pods for FLOMusicPlayer_ReactorKit
 	pod 'ReactorKit'
   pod 'Moya/RxSwift', '~> 15.0'
+  pod 'RxCocoa', '6.5.0'
   pod 'SnapKit'
   pod 'Then'
 end
