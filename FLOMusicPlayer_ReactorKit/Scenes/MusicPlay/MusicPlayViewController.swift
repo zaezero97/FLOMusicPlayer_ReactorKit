@@ -78,6 +78,8 @@ final class MusicPlayViewController: BaseViewController, View {
     
     private var audioPlayer: AVAudioPlayer?
     
+    private var timer: Timer?
+    
     init(reactor: MusicPlayReactor) {
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
@@ -177,6 +179,15 @@ final class MusicPlayViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
+        rx.methodInvoked(#selector(updateTime))
+            .map{
+                [weak self] _ in
+                Reactor.Action.playTime(time: self?.audioPlayer?.currentTime ?? TimeInterval.nan)
+            }
+            .debug()
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         //State
         reactor.state.map {  $0.music }
         .distinctUntilChanged({
@@ -189,15 +200,32 @@ final class MusicPlayViewController: BaseViewController, View {
         reactor.state.map{ $0.lyrics }
         .debug()
         .bind(to: lyricsTableView.rx.items(cellIdentifier: LyricCell.identifier, cellType: LyricCell.self)) { index, lyric, cell in
-            cell.update(with: lyric)
-        }.disposed(by: self.disposeBag)
+            cell.update(with: lyric.lyric)
+        }.disposed(by: disposeBag)
         
         reactor.state.map { $0.isPlayed }
         .debug()
+        .distinctUntilChanged()
         .bind(onNext: changeStateAudioPlayer(_:))
-        .disposed(by: self.disposeBag)
+        .disposed(by: disposeBag)
         
+        reactor.state.map { $0.lyricIndex }
+        .skip(1)
+        .distinctUntilChanged()
+        .bind(onNext: scrollTableView(_:))
+        .disposed(by: disposeBag)
         
+        reactor.state.map { $0.curTime }
+        .distinctUntilChanged()
+        .debug()
+        .bind(to: curTimeLabel.rx.text)
+        .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.progress }
+        .distinctUntilChanged()
+        .debug()
+        .bind(to: progressBar.rx.value)
+        .disposed(by: disposeBag)
     }
 }
 
@@ -209,17 +237,31 @@ private extension MusicPlayViewController {
             with: URL(string: music.image) ?? URL(string: "")
         )
         titleImageView.kf.indicatorType = .activity
+        progressBar.maximumValue = Float(music.duration)
         let data = try? Data(contentsOf: URL(string: music.file) ?? URL(fileURLWithPath: "") )
         audioPlayer = try? AVAudioPlayer(data: data ?? Data())
+        
+        
+        
     }
     
     func changeStateAudioPlayer(_ isPlayed: Bool) {
         if isPlayed {
             audioPlayer?.play()
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         } else {
-            audioPlayer?.stop()
+            audioPlayer?.pause()
+            print("test!!!")
+            timer?.invalidate()
+            timer = nil
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         }
+    }
+    
+    @objc func updateTime() { }
+    
+    func scrollTableView(_ index: Int) {
+        lyricsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: true)
     }
 }
