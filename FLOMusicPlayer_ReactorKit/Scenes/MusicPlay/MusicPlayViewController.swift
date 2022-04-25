@@ -12,6 +12,7 @@ import Then
 import RxSwift
 import RxCocoa
 import Kingfisher
+import AVFAudio
 
 final class MusicPlayViewController: BaseViewController, View {
     
@@ -75,9 +76,12 @@ final class MusicPlayViewController: BaseViewController, View {
         $0.spacing = 8.0
     }
     
+    private var audioPlayer: AVAudioPlayer?
+    
     init(reactor: MusicPlayReactor) {
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
+       
     }
     
     required init?(coder: NSCoder) {
@@ -160,11 +164,24 @@ final class MusicPlayViewController: BaseViewController, View {
     
     func bind(reactor: MusicPlayReactor) {
         
+        //Action
+        
         //viewDidLoad Action
         reactor.action.onNext(.refresh)
         
-        //state
+        playButton.rx.tap
+            .map {
+                [weak self] in
+                return self?.audioPlayer?.isPlaying ?? false ? Reactor.Action.stop : Reactor.Action.play
+            }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        //State
         reactor.state.map {  $0.music }
+        .distinctUntilChanged({
+            $0.file == $1.file
+        })
         .debug()
         .bind(onNext: bindMusicPlayScene(_:))
         .disposed(by: disposeBag)
@@ -174,6 +191,12 @@ final class MusicPlayViewController: BaseViewController, View {
         .bind(to: lyricsTableView.rx.items(cellIdentifier: LyricCell.identifier, cellType: LyricCell.self)) { index, lyric, cell in
             cell.update(with: lyric)
         }.disposed(by: self.disposeBag)
+        
+        reactor.state.map { $0.isPlayed }
+        .debug()
+        .bind(onNext: changeStateAudioPlayer(_:))
+        .disposed(by: self.disposeBag)
+        
         
     }
 }
@@ -186,5 +209,17 @@ private extension MusicPlayViewController {
             with: URL(string: music.image) ?? URL(string: "")
         )
         titleImageView.kf.indicatorType = .activity
+        let data = try? Data(contentsOf: URL(string: music.file) ?? URL(fileURLWithPath: "") )
+        audioPlayer = try? AVAudioPlayer(data: data ?? Data())
+    }
+    
+    func changeStateAudioPlayer(_ isPlayed: Bool) {
+        if isPlayed {
+            audioPlayer?.play()
+            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            audioPlayer?.stop()
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
 }

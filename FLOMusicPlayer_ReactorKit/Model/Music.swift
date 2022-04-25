@@ -12,7 +12,10 @@ struct Music: Decodable {
     let album: String
     let title: String
     let duration: Int
-    let image: String /// 이미지 url
-    let file: String /// music file url
-    let lyrics: String /// 시간에 대한 재생되는 가사
+    /// 이미지 url
+    let image: String
+    /// music file url
+    let file: String
+    /// 시간에 대한 재생되는 가사
+    let lyrics: String
 }

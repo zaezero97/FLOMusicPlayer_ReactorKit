@@ -12,15 +12,20 @@ final class MusicPlayReactor: Reactor {
     
     enum Action {
         case refresh
+        case play
+        case stop
     }
     
     enum Mutation {
         case setMusic(music: Music)
+        case changePlayState(isPlayed: Bool)
     }
     
     struct State {
         var music: Music
         var lyrics: [String]
+        /// true: 재생, false: 정지
+        var isPlayed: Bool
         
     }
     
@@ -34,7 +39,8 @@ final class MusicPlayReactor: Reactor {
             file: "",
             lyrics: "ㄹㄴㅇㅁㅇㄹㅇㄴㅁ"
         ),
-        lyrics: []
+        lyrics: [],
+        isPlayed: false
     )
     
     private let musicAPIService: MusicAPIService
@@ -47,13 +53,18 @@ final class MusicPlayReactor: Reactor {
         print("mutate call!!!")
         switch action {
         case .refresh:
-            return musicAPIService.fetchMusic()
+            let setMusic = musicAPIService.fetchMusic()
                 .compactMap { result -> Music? in
                     guard case let .success(music) = result else { return nil }
                     return music
                 }.map {
                     Mutation.setMusic(music: $0)
                 }
+            return Observable.concat([Observable.just(Mutation.changePlayState(isPlayed: false)), setMusic])
+        case .play:
+            return Observable.just(Mutation.changePlayState(isPlayed: true))
+        case .stop:
+            return Observable.just(Mutation.changePlayState(isPlayed: false))
         }
     }
     
@@ -64,6 +75,8 @@ final class MusicPlayReactor: Reactor {
         case .setMusic(let music):
             newState.music = music
             newState.lyrics = music.lyrics.components(separatedBy: "\n")
+        case .changePlayState(let isPlayed):
+            newState.isPlayed = isPlayed
         }
         
         return newState
