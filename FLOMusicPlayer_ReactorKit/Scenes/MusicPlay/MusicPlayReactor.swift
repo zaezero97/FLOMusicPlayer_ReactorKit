@@ -27,12 +27,13 @@ final class MusicPlayReactor: Reactor {
     
     struct State {
         var music: Music
-        var lyrics: [(time: String, lyric: String)]
+        var lyrics: [String]
         /// true: 재생, false: 정지
         var isPlayed: Bool
         var lyricIndex: Int
         var curTime: String
         var progress: Float
+        var lyricTimes: [String]
     }
     
     let initialState: State = .init(
@@ -40,16 +41,17 @@ final class MusicPlayReactor: Reactor {
             singer: "제제로",
             album: "무한 열차와다다다",
             title: "에브리바디 부처핸섭",
-            duration: 456,
+            duration: 0,
             image: "",
             file: "",
-            lyrics: "ㄹㄴㅇㅁㅇㄹㅇㄴㅁ"
+            lyrics: ""
         ),
         lyrics: [],
         isPlayed: false,
         lyricIndex: 0,
         curTime: "00:00",
-        progress: 0.0
+        progress: 0.0,
+        lyricTimes: []
     )
     
     private let musicAPIService: MusicAPIService
@@ -91,12 +93,18 @@ final class MusicPlayReactor: Reactor {
         switch mutation {
         case .setMusic(let music):
             newState.music = music
-            newState.lyrics = music.lyrics.split(separator: "\n").map{
-                (splitedLyric) -> (time:String, lyric: String) in
-                let str = String(splitedLyric)
+            let splitedLyric = music.lyrics.split(separator: "\n")
+            newState.lyrics = splitedLyric.map{
+                let str = String($0)
                 let splitIndex = str.index(str.startIndex, offsetBy: 10)
-                return (time: String(str[str.startIndex...splitIndex]), lyric: String(str[str.index(splitIndex, offsetBy: 1)...]))
+                return String(str[str.index(splitIndex, offsetBy: 1)...])
             }
+            newState.lyricTimes = splitedLyric.map {
+                let str = String($0)
+                let splitIndex = str.index(str.startIndex, offsetBy: 10)
+                return String(str[str.startIndex...splitIndex])
+            }
+            
         case .changePlayState(let isPlayed):
             newState.isPlayed = isPlayed
         case .getCurrentLyric(index: let index):
@@ -113,13 +121,13 @@ final class MusicPlayReactor: Reactor {
 
 private extension MusicPlayReactor {
     func getCurrentLyricIndex(_ time: Double) -> Observable<Mutation> {
-        let index = currentState.lyrics.lastIndex {
-            $0.time.tolyricTime() <= time
+        let index = currentState.lyricTimes.lastIndex {
+            $0.tolyricTime() <= time
         }
         return Observable.just(Mutation.getCurrentLyric(index: index ?? 0))
     }
     
-   
+    
 }
 
 extension String {

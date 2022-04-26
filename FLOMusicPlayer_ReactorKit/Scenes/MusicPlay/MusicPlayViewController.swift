@@ -38,6 +38,7 @@ final class MusicPlayViewController: BaseViewController, View {
         $0.showsVerticalScrollIndicator = false
         $0.register(LyricCell.self, forCellReuseIdentifier: LyricCell.identifier)
         $0.separatorStyle = .none
+        $0.allowsMultipleSelection = false
         $0.rowHeight = 45.0
     }
     
@@ -198,9 +199,10 @@ final class MusicPlayViewController: BaseViewController, View {
         .disposed(by: disposeBag)
         
         reactor.state.map{ $0.lyrics }
+        .distinctUntilChanged()
         .debug()
         .bind(to: lyricsTableView.rx.items(cellIdentifier: LyricCell.identifier, cellType: LyricCell.self)) { index, lyric, cell in
-            cell.update(with: lyric.lyric)
+            cell.update(with: lyric)
         }.disposed(by: disposeBag)
         
         reactor.state.map { $0.isPlayed }
@@ -226,6 +228,8 @@ final class MusicPlayViewController: BaseViewController, View {
         .debug()
         .bind(to: progressBar.rx.value)
         .disposed(by: disposeBag)
+        
+
     }
 }
 
@@ -252,7 +256,6 @@ private extension MusicPlayViewController {
             playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         } else {
             audioPlayer?.pause()
-            print("test!!!")
             timer?.invalidate()
             timer = nil
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
@@ -262,6 +265,11 @@ private extension MusicPlayViewController {
     @objc func updateTime() { }
     
     func scrollTableView(_ index: Int) {
-        lyricsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: true)
+        let indexPath = IndexPath(row: index, section: 0)
+        let cell = lyricsTableView.cellForRow(at: indexPath) as! LyricCell
+        
+        //lyricsTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        lyricsTableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        
     }
 }
