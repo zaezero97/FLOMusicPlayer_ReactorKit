@@ -12,5 +12,5 @@ target 'FLOMusicPlayer_ReactorKit' do
   pod 'SnapKit'
   pod 'Then'
   pod 'Kingfisher'
-  
+  pod 'RxDataSources'
 end
