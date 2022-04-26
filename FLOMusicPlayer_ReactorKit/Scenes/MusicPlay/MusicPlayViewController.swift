@@ -38,7 +38,6 @@ final class MusicPlayViewController: BaseViewController, View {
         $0.showsVerticalScrollIndicator = false
         $0.register(LyricCell.self, forCellReuseIdentifier: LyricCell.identifier)
         $0.separatorStyle = .none
-        $0.allowsMultipleSelection = false
         $0.rowHeight = 45.0
     }
     
@@ -244,9 +243,7 @@ private extension MusicPlayViewController {
         progressBar.maximumValue = Float(music.duration)
         let data = try? Data(contentsOf: URL(string: music.file) ?? URL(fileURLWithPath: "") )
         audioPlayer = try? AVAudioPlayer(data: data ?? Data())
-        
-        
-        
+        endTimeLabel.text = music.duration.toTimeString()
     }
     
     func changeStateAudioPlayer(_ isPlayed: Bool) {
