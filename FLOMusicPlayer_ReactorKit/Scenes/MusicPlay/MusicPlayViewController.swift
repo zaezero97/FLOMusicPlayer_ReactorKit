@@ -228,6 +228,14 @@ final class MusicPlayViewController: BaseViewController, View {
         .bind(to: progressBar.rx.value)
         .disposed(by: disposeBag)
         
+        progressBar.rx.methodInvoked(#selector(progressBar.endTracking(_:with:)))
+            .subscribe(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                print(self.progressBar.value)
+                self.audioPlayer?.currentTime = TimeInterval(self.progressBar.value)
+                //self.updateTime()
+            }).disposed(by: disposeBag)
 
     }
 }
@@ -263,10 +271,8 @@ private extension MusicPlayViewController {
     
     func scrollTableView(_ index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
-        let cell = lyricsTableView.cellForRow(at: indexPath) as! LyricCell
         
         //lyricsTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
         lyricsTableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-        
     }
 }
