@@ -15,7 +15,14 @@ final class LyricCell: UITableViewCell {
     private let lyricLabel = UILabel().then {
         $0.textAlignment = .center
     }
-    
+
+//    override var isSelected: Bool {
+//        willSet {
+//            print(" \(lyricLabel.text) isSelected: \(isSelected)")
+//            lyricLabel.textColor = newValue ? .black : .gray
+//        }
+//    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -24,6 +31,11 @@ final class LyricCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        lyricLabel.textColor = .gray
     }
     
     private func configureUI() {
@@ -39,4 +51,10 @@ final class LyricCell: UITableViewCell {
     func update(with lyric: String) {
         lyricLabel.text = lyric
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+
+        lyricLabel.textColor = selected ? .black : .gray
+    }
+    
 }

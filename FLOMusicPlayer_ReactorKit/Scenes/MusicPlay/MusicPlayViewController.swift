@@ -12,6 +12,7 @@ import Then
 import RxSwift
 import RxCocoa
 import Kingfisher
+import AVFAudio
 
 final class MusicPlayViewController: BaseViewController, View {
     
@@ -75,9 +76,14 @@ final class MusicPlayViewController: BaseViewController, View {
         $0.spacing = 8.0
     }
     
+    private var audioPlayer: AVAudioPlayer?
+    
+    private var timer: Timer?
+    
     init(reactor: MusicPlayReactor) {
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
+       
     }
     
     required init?(coder: NSCoder) {
@@ -160,21 +166,77 @@ final class MusicPlayViewController: BaseViewController, View {
     
     func bind(reactor: MusicPlayReactor) {
         
+        //Action
+        
         //viewDidLoad Action
         reactor.action.onNext(.refresh)
         
-        //state
+        playButton.rx.tap
+            .map {
+                [weak self] in
+                return self?.audioPlayer?.isPlaying ?? false ? Reactor.Action.stop : Reactor.Action.play
+            }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        rx.methodInvoked(#selector(updateTime))
+            .map{
+                [weak self] _ in
+                Reactor.Action.playTime(time: self?.audioPlayer?.currentTime ?? TimeInterval.nan)
+            }
+            .debug()
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        //State
         reactor.state.map {  $0.music }
+        .distinctUntilChanged({
+            $0.file == $1.file
+        })
         .debug()
         .bind(onNext: bindMusicPlayScene(_:))
         .disposed(by: disposeBag)
         
         reactor.state.map{ $0.lyrics }
+        .distinctUntilChanged()
         .debug()
         .bind(to: lyricsTableView.rx.items(cellIdentifier: LyricCell.identifier, cellType: LyricCell.self)) { index, lyric, cell in
             cell.update(with: lyric)
-        }.disposed(by: self.disposeBag)
+        }.disposed(by: disposeBag)
         
+        reactor.state.map { $0.isPlayed }
+        .debug()
+        .distinctUntilChanged()
+        .bind(onNext: changeStateAudioPlayer(_:))
+        .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.lyricIndex }
+        .skip(1)
+        .distinctUntilChanged()
+        .bind(onNext: scrollTableView(_:))
+        .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.curTime }
+        .distinctUntilChanged()
+        .debug()
+        .bind(to: curTimeLabel.rx.text)
+        .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.progress }
+        .distinctUntilChanged()
+        .debug()
+        .bind(to: progressBar.rx.value)
+        .disposed(by: disposeBag)
+        
+        progressBar.rx.methodInvoked(#selector(progressBar.endTracking(_:with:)))
+            .subscribe(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                print(self.progressBar.value)
+                self.audioPlayer?.currentTime = TimeInterval(self.progressBar.value)
+                //self.updateTime()
+            }).disposed(by: disposeBag)
+
     }
 }
 
@@ -186,5 +248,31 @@ private extension MusicPlayViewController {
             with: URL(string: music.image) ?? URL(string: "")
         )
         titleImageView.kf.indicatorType = .activity
+        progressBar.maximumValue = Float(music.duration)
+        let data = try? Data(contentsOf: URL(string: music.file) ?? URL(fileURLWithPath: "") )
+        audioPlayer = try? AVAudioPlayer(data: data ?? Data())
+        endTimeLabel.text = music.duration.toTimeString()
+    }
+    
+    func changeStateAudioPlayer(_ isPlayed: Bool) {
+        if isPlayed {
+            audioPlayer?.play()
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            audioPlayer?.pause()
+            timer?.invalidate()
+            timer = nil
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
+    }
+    
+    @objc func updateTime() { }
+    
+    func scrollTableView(_ index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        
+        //lyricsTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        lyricsTableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
     }
 }
